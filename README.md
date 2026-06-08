@@ -25,6 +25,7 @@ Além da movimentação, cada fantasma alterna entre quatro **estados de comport
 - ***Scatter***: O fantasma vira em 180 graus (o que resulta nele virando para trás, uma exceção à regra citada anteriormente) e **recua para um determinado canto no mapa** (cada fantasma se move para um dos cantos).
 - ***Frightened***: O jogador coletou uma fruta e por determinado período de tempo, todos os fantasmas se movimentam para trás (uma exceção à regra citada anteriormente) e então **se movem em uma direção aleatória** (seguindo a lógica citada anteriormente).
 - ***Eaten***: Caso o jogador faça contato físico com um fantasma durante o estado '*Frightened*', ele passa para o estado *eaten*, **onde não pode afetar o jogador até retornar a *ghost cage*** (centro do mapa) com o seu *target* sendo posicionado na frente da entrada desta área. Chegando lá, muda para o estado *chase* ou *scatter*.
+
 ![Ghosts behavior explanation diagram](assets/ghosts_behavior_explanation.png)
 
 *Imagem e conceitos retirados [deste](https://youtu.be/ataGotQ7ir8?si=Oc1PzYdHzopza5ju) vídeo.*
