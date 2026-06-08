@@ -27,8 +27,8 @@ Além da movimentação, cada fantasma alterna entre quatro **estados de comport
 - ***Eaten***: Caso o jogador faça contato físico com um fantasma durante o estado '*Frightened*', ele passa para o estado *eaten*, **onde não pode afetar o jogador até retornar a *ghost cage*** (centro do mapa) com o seu *target* sendo posicionado na frente da entrada desta área. Chegando lá, muda para o estado *chase* ou *scatter*.
 
 ![Ghosts behavior explanation diagram](assets/ghosts_behavior_explanation.png)
-
 *Imagem e conceitos retirados [deste](https://youtu.be/ataGotQ7ir8?si=Oc1PzYdHzopza5ju) vídeo.*
+
 ### O agente que controla o Pacman melhora com o tempo?
 Não, pois ele não possui **aprendizagem de máquina**, mas sim um algoritmo com base em pontuações.
 ### Você criou o completamente do zero?
