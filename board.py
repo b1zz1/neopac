@@ -33,7 +33,7 @@ def draw_board(lvl, color):
                 # Arch (top -> right)
                 pygame.draw.arc(cfg.screen, color, [(j * num_2 + (num_2 * 0.5)), (i * num_1 - (0.5 * num_1)), num_2, num_1], cfg.PI, 3 * cfg.PI / 2, 3)
             if lvl[i][j] == 8:
-                # Arch (top -> right)
+                # Arch (top -> left)
                 pygame.draw.arc(cfg.screen, color, [(j * num_2 - (num_2 * 0.5)), (i * num_1 - (0.5 * num_1)), num_2, num_1], 3 * cfg.PI / 2, 2 * cfg.PI, 3)
             if lvl[i][j] == 9:
                 # Gate (horizontal)
