@@ -1,5 +1,3 @@
-import pygame
-
 # Window constants
 TILE_SIZE = 32                   # 8x8 as in the original game
 ROWS = 33                        # Vertical tiles
@@ -13,6 +11,3 @@ FPS = 60
 # Player constants
 FUDGE = 15
 PLAYER_SPEED = 2
-
-screen = pygame.display.set_mode([WIDTH, HEIGHT])
-timer = pygame.time.Clock()

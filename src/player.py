@@ -14,22 +14,22 @@ for i in range(0, 4):
     player_frames.append(pygame.transform.scale(pygame.image.load(f'assets/entities/player/{skin}_{i}.png'), (32, 32)))
 
 
-def draw(pos_x, pos_y, counter, direction):
+def draw(screen, pos_x, pos_y, counter, direction):
     '''
     Draws player character at parameter position
     '''
     if direction == 0:
         # RIGHT
-        cfg.screen.blit(player_frames[counter // 5], (pos_x, pos_y))
+        screen.blit(player_frames[counter // 5], (pos_x, pos_y))
     elif direction == 1:
         # LEFT
-        cfg.screen.blit(pygame.transform.flip(player_frames[counter // 5], True, False), (pos_x, pos_y))
+        screen.blit(pygame.transform.flip(player_frames[counter // 5], True, False), (pos_x, pos_y))
     elif direction == 2:
         # UP
-        cfg.screen.blit(pygame.transform.rotate(player_frames[counter // 5], 90), (pos_x, pos_y))
+        screen.blit(pygame.transform.rotate(player_frames[counter // 5], 90), (pos_x, pos_y))
     elif direction == 3:
         # DOWN
-        cfg.screen.blit(pygame.transform.rotate(player_frames[counter // 5], -90), (pos_x, pos_y))
+        screen.blit(pygame.transform.rotate(player_frames[counter // 5], -90), (pos_x, pos_y))
 
 
 def handle_input(event, buffered_direction, direction):

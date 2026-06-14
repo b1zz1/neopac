@@ -9,12 +9,16 @@ import player
 pygame.init()
 
 DEBUG = False
-FONT = pygame.font.Font(None, 20)  # TODO: Improve font choice
+
+screen = pygame.display.set_mode([cfg.WIDTH, cfg.HEIGHT])
+timer = pygame.time.Clock()
+font = pygame.font.Font(None, 20)  # TODO: Improve font choice
+
 level = lvl_1
 counter = 0
 flicker = False
 
-# Player tarting position
+# Player starting position
 player_grid_x = 14  # Column 14
 player_grid_y = 24  # Row 24
 # Player position
@@ -27,7 +31,7 @@ turns_allowed = [False, False, False, False]
 
 run = True
 while run:
-    cfg.timer.tick(cfg.FPS)
+    timer.tick(cfg.FPS)
 
     # Counter & animations
     if counter < 19:
@@ -57,13 +61,13 @@ while run:
     player_position_x, player_position_y = player.handle_movement(player_position_x, player_position_y, direction, turns_allowed)
 
     # Render graphics
-    cfg.screen.fill('black')
-    board.draw(level.board, level.color, flicker)
+    screen.fill('black')
+    board.draw(screen, level.board, level.color, flicker)
 
-    player.draw(player_position_x, player_position_y, counter, direction)
+    player.draw(screen, player_position_x, player_position_y, counter, direction)
 
     if DEBUG:
-        debug.draw_player_fudge(direction, player_center_x, player_center_y)
+        debug.draw_player_fudge(screen, direction, player_center_x, player_center_y)
 
     # Teleport players passing through the hatches
     player_position_x = board.handle_side_hatches(player_position_x, player_center_x)
