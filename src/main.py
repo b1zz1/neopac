@@ -5,6 +5,7 @@ import config as cfg
 import debug
 import levels.level_1 as lvl_1
 import player
+import score
 
 pygame.init()
 
@@ -29,6 +30,11 @@ direction = 0
 buffered_direction = 0
 turns_allowed = [False, False, False, False]
 
+# Player score
+player_score = 0
+score_multiplier = 1.0
+
+
 run = True
 while run:
     timer.tick(cfg.FPS)
@@ -52,6 +58,8 @@ while run:
     # Core game logic
     player_center_x = player_position_x + (cfg.TILE_SIZE // 2)
     player_center_y = player_position_y + (cfg.TILE_SIZE // 2)
+
+    player_score = score.handle_collisions(level.board, player_score, score_multiplier, player_position_x, player_center_x, player_center_y)
 
     # Update valid turning areas in real time
     turns_allowed = player.handle_collision(player_center_x, player_center_y, direction, level.board)
