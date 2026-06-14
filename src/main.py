@@ -65,9 +65,8 @@ while run:
     if DEBUG:
         debug.draw_player_fudge(direction, player_center_x, player_center_y)
 
-    if player_center_x > 970:
-        player_position_x = -20
-    elif player_center_x < -24:
-        player_position_x = 950
+    # Teleport players passing through the hatches
+    player_position_x = board.handle_side_hatches(player_position_x, player_center_x)
+
     pygame.display.flip()
 pygame.quit()

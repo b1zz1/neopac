@@ -46,3 +46,15 @@ def draw(lvl, color, flicker):
             if lvl[i][j] == 9:
                 # Gate (horizontal)
                 pygame.draw.line(cfg.screen, 'white', (x, y + (0.5 * tile)), (x + tile, y + (0.5 * tile)), 3)
+
+
+def handle_side_hatches(pos_x, center_x):
+    '''
+    Teleport entities passing trought the hatches
+    '''
+    if center_x > 970:
+        pos_x = -20
+    elif center_x < -24:
+        pos_x = 950
+
+    return pos_x
