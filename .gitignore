@@ -87,6 +87,9 @@ coverage.xml
 # PyCharm / IntelliJ
 .idea/
 
+# Zed
+.zed
+
 # Editor backups
 *.swp
 *.swo
