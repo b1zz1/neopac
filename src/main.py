@@ -8,7 +8,7 @@ import player
 
 pygame.init()
 
-DEBUG = True
+DEBUG = False
 FONT = pygame.font.Font(None, 20)  # TODO: Improve font choice
 level = lvl_1
 counter = 0
