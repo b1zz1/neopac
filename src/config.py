@@ -7,9 +7,10 @@ HEIGHT = ROWS * TILE_SIZE + 50 # 33 * 32 + 50 = 1106 pixels
 
 # Game constants
 FPS = 60
+AI_MODE = True
 
 # Player constants
-FUDGE = 15
+FUDGE = 16
 PLAYER_SPEED = 2
 
 # Player

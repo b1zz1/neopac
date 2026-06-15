@@ -22,7 +22,7 @@ def draw_startup_countdown(screen, font, count):
 
     if count < 180:
         countdown = (180 - count) // 60 + 1
-        text = font.render(countdown, True, 'white')
+        text = font.render(str(countdown), True, 'white')
     elif 180 <= count < 280:
         if (count // 10) % 2 == 0:
             text = font.render('START!!!', True, 'white')

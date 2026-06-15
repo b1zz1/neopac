@@ -1,5 +1,6 @@
 import pygame
 
+import ai
 import board
 import config as cfg
 import debug
@@ -28,6 +29,9 @@ player_grid_y = 24  # Row 24
 # Player position
 player_position_x = player_grid_x * cfg.TILE_SIZE
 player_position_y = player_grid_y * cfg.TILE_SIZE
+# Player center
+player_center_x = player_position_x + (cfg.TILE_SIZE // 2)
+player_center_y = player_position_y + (cfg.TILE_SIZE // 2)
 # Player direction
 direction = 0
 buffered_direction = 0
@@ -45,7 +49,7 @@ while run:
     timer.tick(cfg.FPS)
 
     # Delays game start
-    if startup_counter < 300:
+    if startup_counter < 280:
         startup_counter += 1
 
     if startup_counter < 180:
@@ -75,7 +79,8 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
-        buffered_direction = player.handle_input(event, buffered_direction, direction)
+        if moving_allowed and not cfg.AI_MODE:
+            buffered_direction = player.handle_input(event, buffered_direction, direction)
 
     # Core game logic
     player_center_x = player_position_x + (cfg.TILE_SIZE // 2)
@@ -85,7 +90,17 @@ while run:
 
     # Update valid turning areas in real time
     turns_allowed = player.handle_collision(player_center_x, player_center_y, direction, level.board)
-    # Optimize grid navigation for smoother UX
+
+    # AI controller (Fires cleanly only at exact tile junctions)
+    if moving_allowed and cfg.AI_MODE:
+        if player_position_x % cfg.TILE_SIZE == 0 and player_position_y % cfg.TILE_SIZE == 0:
+            grid_x = player_position_x // cfg.TILE_SIZE
+            grid_y = player_position_y // cfg.TILE_SIZE
+
+            target = ai.clean_a_star(grid_x, grid_y, level.board)
+            buffered_direction = ai.get_direction(grid_x, grid_y, target)
+
+    # Optimize grid navigation & process actual physical movement
     direction, player_position_x, player_position_y = player.handle_direction(direction, buffered_direction, turns_allowed, player_position_x, player_position_y)
     # Move the player to valid directions & update current position
     if moving_allowed:
@@ -98,7 +113,7 @@ while run:
     ui.draw_lives(screen, lives)
     player.draw(screen, player_position_x, player_position_y, counter, direction)
 
-    if startup_counter < 300:
+    if startup_counter < 280:
         ui.draw_startup_countdown(screen, font_lg, startup_counter)
 
     if DEBUG:
