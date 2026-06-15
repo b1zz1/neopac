@@ -30,9 +30,6 @@ player_grid_y = 24  # Row 24
 # Player position
 player_position_x = player_grid_x * cfg.TILE_SIZE
 player_position_y = player_grid_y * cfg.TILE_SIZE
-# Player center
-player_center_x = player_position_x + (cfg.TILE_SIZE // 2)
-player_center_y = player_position_y + (cfg.TILE_SIZE // 2)
 # Player direction
 direction = 0
 buffered_direction = 0
