@@ -46,6 +46,12 @@ run = True
 while run:
     timer.tick(cfg.FPS)
 
+    # Win condition
+    cfg.game_won = True
+    for i in range(len(level.board)):
+        if 1 in level.board[i] or 2 in level.board[i]:
+            cfg.game_won = False
+
     # Delays game start
     if startup_counter < 280:
         startup_counter += 1

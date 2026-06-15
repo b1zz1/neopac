@@ -34,7 +34,7 @@ def draw_startup_countdown(screen, font, count):
         rect.center = (window_width // 2, window_height - tile)
         screen.blit(text, rect)
 
-
+# TODO: Improve game over and game won messages!
 def draw_game_over(screen, font):
     text = font.render('GAME OVER!\nPress SPACE BAR to quit.', True, 'red')
 
