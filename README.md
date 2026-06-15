@@ -38,7 +38,15 @@ Não, eu escrevi o código, mas seguindo este tutorial https://youtu.be/9H27Cimg
 - **Saída**: O sistema exibe o tempo de execução da rodada, assim como a pontuação final, número de orbes e frutas especiais coletados e número de fantasmas devorados.
 ### Quais as tecnologias utilizadas para o desenvolvimento?
 **Python** e **Pygame**, assim como **Git** e **Github** (também hospedado no **Codeberg**) para gerenciamento de repositório.
+
+## Créditos & Licenças
+
+* **Fonte:** Tiny5 por Stefan Schmidt 
+  * Origem: [[Google Fonts - Tiny5]](https://fonts.google.com/specimen/Tiny5)
+  * Licença: Distributed under the [SIL Open Font License 1.1](assets/fonts/OFL.txt).
+
 ## Referências
+
 - GHOSTS (Pac-Man). In: **WIKIPEDIA**: the free encyclopedia. Flórida: Wikimedia Foundation, 2026. Disponível em: <https://en.wikipedia.org/wiki/Ghosts_(Pac-Man)>. Acesso em: 7 jun. 2026.
 - HOW to Make Pac-Man in Python!. [s. l.]: LeMaster Tech, 25 out. 2022. 1 vídeo (4h 30min 46s). Publicado pelo canal LeMaster Tech. Disponível em: <https://youtu.be/9H27CimgPsQ>. Acesso em: 7 jun. 2026.
 - PAC-MAN Ghost AI Explained. [s. l.]: Retro Game Mechanics Explained, 13 jul. 2019. 1 vídeo (19min 34s). Publicado pelo canal Retro Game Mechanics Explained. Disponível em: <https://youtu.be/ataGotQ7ir8>. Acesso em: 7 jun. 2026.

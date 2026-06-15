@@ -3,7 +3,7 @@ import pygame
 import config as cfg
 
 
-def draw_player_fudge(direction, center_x, center_y):
+def draw_player_fudge(screen, direction, center_x, center_y):
     '''
     DYNAMIC FUDGE VISUALIZER
     '''
@@ -21,6 +21,14 @@ def draw_player_fudge(direction, center_x, center_y):
         fudge_target_y += cfg.FUDGE
 
     # Green line showing the look-ahead fudge vector
-    pygame.draw.line(cfg.screen, (0, 255, 0), (center_x, center_y), (fudge_target_x, fudge_target_y), 3)
+    pygame.draw.line(screen, (0, 255, 0), (center_x, center_y), (fudge_target_x, fudge_target_y), 2)
     # Red dot at the tip of the fudge line
-    pygame.draw.circle(cfg.screen, (255, 0, 0), (int(fudge_target_x), int(fudge_target_y)), 4)
+    pygame.draw.circle(screen, (255, 0, 0), (int(fudge_target_x), int(fudge_target_y)), 4)
+
+
+def draw_power_up_indicator(screen):
+    '''
+    POWER-UP VISUALIZER
+    '''
+    if cfg.power_up_active:
+        pygame.draw.circle(screen, 'blue', (cfg.WIDTH / 2, cfg.HEIGHT - (cfg.TILE_SIZE)), cfg.TILE_SIZE / 2)

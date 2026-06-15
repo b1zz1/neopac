@@ -4,32 +4,32 @@ import config as cfg
 from utils import is_near_tile_center
 
 tile = cfg.TILE_SIZE
-fudge = 15
+fudge = cfg.FUDGE
 
-player_frames = []
+
 skin = 'simple'
 
 
 for i in range(0, 4):
-    player_frames.append(pygame.transform.scale(pygame.image.load(f'assets/entities/player/{skin}_{i}.png'), (32, 32)))
+    cfg.player_frames.append(pygame.transform.scale(pygame.image.load(f'assets/entities/player/{skin}_{i}.png'), (32, 32)))
 
 
-def draw(pos_x, pos_y, counter, direction):
+def draw(screen, pos_x, pos_y, counter, direction):
     '''
     Draws player character at parameter position
     '''
     if direction == 0:
         # RIGHT
-        cfg.screen.blit(player_frames[counter // 5], (pos_x, pos_y))
+        screen.blit(cfg.player_frames[counter // 5], (pos_x, pos_y))
     elif direction == 1:
         # LEFT
-        cfg.screen.blit(pygame.transform.flip(player_frames[counter // 5], True, False), (pos_x, pos_y))
+        screen.blit(pygame.transform.flip(cfg.player_frames[counter // 5], True, False), (pos_x, pos_y))
     elif direction == 2:
         # UP
-        cfg.screen.blit(pygame.transform.rotate(player_frames[counter // 5], 90), (pos_x, pos_y))
+        screen.blit(pygame.transform.rotate(cfg.player_frames[counter // 5], 90), (pos_x, pos_y))
     elif direction == 3:
         # DOWN
-        cfg.screen.blit(pygame.transform.rotate(player_frames[counter // 5], -90), (pos_x, pos_y))
+        screen.blit(pygame.transform.rotate(cfg.player_frames[counter // 5], -90), (pos_x, pos_y))
 
 
 def handle_input(event, buffered_direction, direction):
@@ -62,7 +62,7 @@ def handle_input(event, buffered_direction, direction):
 
 def handle_collision(center_x, center_y, direction, lvl):
     turns = [False, False, False, False]
-    fudge = 15
+    fudge = cfg.FUDGE
 
     grid_x = center_x // tile
     grid_y = center_y // tile
@@ -124,7 +124,7 @@ def handle_collision(center_x, center_y, direction, lvl):
 
 def handle_direction(direction, buffered_dir, turns_allowed, pos_x, pos_y):
         # Check if buffered direction is allowed
-        if turns_allowed[buffered_dir]:
+        if turns_allowed[buffered_dir] and buffered_dir != direction:
             if buffered_dir != direction:
                 # Turning UP or DOWN? Snap X to the center of the column
                 if buffered_dir == 2 or buffered_dir == 3:
