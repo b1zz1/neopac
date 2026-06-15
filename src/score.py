@@ -13,6 +13,7 @@ def handle_collisions(lvl, score, multiplier, pos_x, center_x, center_y):
             lvl[center_y // tile][center_x // tile] = 0
             score += 50 * multiplier
             cfg.power_up_active = True
+            cfg.game_over = True
             cfg.power_up_counter = 600
 
     return score

@@ -7,7 +7,9 @@ HEIGHT = ROWS * TILE_SIZE + 50 # 33 * 32 + 50 = 1106 pixels
 
 # Game constants
 FPS = 60
-AI_MODE = True
+AI_MODE = False
+game_over = False
+game_won = False
 
 # Player constants
 FUDGE = 16

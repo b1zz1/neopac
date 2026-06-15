@@ -15,6 +15,7 @@ DEBUG = True
 
 screen = pygame.display.set_mode([cfg.WIDTH, cfg.HEIGHT])
 timer = pygame.time.Clock()
+
 font = pygame.font.Font("assets/fonts/Tiny5-Regular.ttf", cfg.TILE_SIZE)
 font_lg = pygame.font.Font("assets/fonts/Tiny5-Regular.ttf", cfg.TILE_SIZE + 16)
 
@@ -54,7 +55,7 @@ while run:
 
     if startup_counter < 180:
         moving_allowed = False
-    else:
+    elif not cfg.game_over and not cfg.game_won:
         moving_allowed = True
 
     # Big dots animation
@@ -79,6 +80,10 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE and (cfg.game_over or cfg.game_won):
+                run = False
+
         if moving_allowed and not cfg.AI_MODE:
             buffered_direction = player.handle_input(event, buffered_direction, direction)
 
@@ -91,7 +96,7 @@ while run:
     # Update valid turning areas in real time
     turns_allowed = player.handle_collision(player_center_x, player_center_y, direction, level.board)
 
-    # AI controller (Fires cleanly only at exact tile junctions)
+    # AI controller
     if moving_allowed and cfg.AI_MODE:
         if player_position_x % cfg.TILE_SIZE == 0 and player_position_y % cfg.TILE_SIZE == 0:
             grid_x = player_position_x // cfg.TILE_SIZE
@@ -115,6 +120,14 @@ while run:
 
     if startup_counter < 280:
         ui.draw_startup_countdown(screen, font_lg, startup_counter)
+
+    if cfg.game_over:
+        moving_allowed = False
+        ui.draw_game_over(screen, font_lg)
+
+    if cfg.game_won:
+        moving_allowed = False
+        ui.draw_game_won(screen, font_lg)
 
     if DEBUG:
         debug.draw_player_fudge(screen, direction, player_center_x, player_center_y)

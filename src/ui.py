@@ -33,3 +33,20 @@ def draw_startup_countdown(screen, font, count):
         rect = text.get_rect()
         rect.center = (window_width // 2, window_height - tile)
         screen.blit(text, rect)
+
+
+def draw_game_over(screen, font):
+    text = font.render('GAME OVER!\nPress SPACE BAR to quit.', True, 'red')
+
+    pygame.draw.rect(screen, 'white', [50, 200, 800, 300], 0, 10)
+    pygame.draw.rect(screen, 'dark gray', [70, 220, 760, 260], 0, 10)
+
+    screen.blit(text, (100, 300))
+
+def draw_game_won(screen, font):
+    text = font.render('YOU WON!\nPress SPACE BAR to quit.', True, 'blue')
+
+    pygame.draw.rect(screen, 'white', [50, 200, 800, 300], 0, 10)
+    pygame.draw.rect(screen, 'dark gray', [70, 220, 760, 260], 0, 10)
+
+    screen.blit(text, (100, 300))
