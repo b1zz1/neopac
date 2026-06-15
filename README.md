@@ -2,6 +2,11 @@
 v0.1
 ## Descrição
 Este sistema consiste em um ambiente simulado baseado no clássico **Pacman**, onde o agente principal (**Pacman**) é controlado de forma autônoma por um algoritmo de busca heurística $A*$. Utilizando a **Distância de Manhattan** como heurística adaptativa, o agente é capaz de calcular rotas otimizadas para recolher elementos do cenário enquanto desvia dinamicamente de fantasmas através da manipulação de pesos e custos na matriz do mapa.
+
+<img src="assets/neopac_pre_release.gif" alt="Pre-release preview" width="100%">
+
+*Work in progress.*
+
 ## Funcionalidades
 - Personagem jogável ou controlado por algoritmo $A*$
 - 4 fantasmas com movimentação distintas
