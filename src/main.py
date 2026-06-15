@@ -1,5 +1,6 @@
 import pygame
 
+import ai
 import board
 import config as cfg
 import debug
@@ -14,6 +15,7 @@ DEBUG = True
 
 screen = pygame.display.set_mode([cfg.WIDTH, cfg.HEIGHT])
 timer = pygame.time.Clock()
+
 font = pygame.font.Font("assets/fonts/Tiny5-Regular.ttf", cfg.TILE_SIZE)
 font_lg = pygame.font.Font("assets/fonts/Tiny5-Regular.ttf", cfg.TILE_SIZE + 16)
 
@@ -44,13 +46,19 @@ run = True
 while run:
     timer.tick(cfg.FPS)
 
+    # Win condition
+    cfg.game_won = True
+    for i in range(len(level.board)):
+        if 1 in level.board[i] or 2 in level.board[i]:
+            cfg.game_won = False
+
     # Delays game start
-    if startup_counter < 300:
+    if startup_counter < 280:
         startup_counter += 1
 
     if startup_counter < 180:
         moving_allowed = False
-    else:
+    elif not cfg.game_over and not cfg.game_won:
         moving_allowed = True
 
     # Big dots animation
@@ -75,7 +83,12 @@ while run:
         if event.type == pygame.QUIT:
             run = False
 
-        buffered_direction = player.handle_input(event, buffered_direction, direction)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE and (cfg.game_over or cfg.game_won):
+                run = False
+
+        if moving_allowed and not cfg.AI_MODE:
+            buffered_direction = player.handle_input(event, buffered_direction, direction)
 
     # Core game logic
     player_center_x = player_position_x + (cfg.TILE_SIZE // 2)
@@ -85,7 +98,17 @@ while run:
 
     # Update valid turning areas in real time
     turns_allowed = player.handle_collision(player_center_x, player_center_y, direction, level.board)
-    # Optimize grid navigation for smoother UX
+
+    # AI controller
+    if moving_allowed and cfg.AI_MODE:
+        if player_position_x % cfg.TILE_SIZE == 0 and player_position_y % cfg.TILE_SIZE == 0:
+            grid_x = player_position_x // cfg.TILE_SIZE
+            grid_y = player_position_y // cfg.TILE_SIZE
+
+            target = ai.clean_a_star(grid_x, grid_y, level.board)
+            buffered_direction = ai.get_direction(grid_x, grid_y, target)
+
+    # Optimize grid navigation & process actual physical movement
     direction, player_position_x, player_position_y = player.handle_direction(direction, buffered_direction, turns_allowed, player_position_x, player_position_y)
     # Move the player to valid directions & update current position
     if moving_allowed:
@@ -98,8 +121,16 @@ while run:
     ui.draw_lives(screen, lives)
     player.draw(screen, player_position_x, player_position_y, counter, direction)
 
-    if startup_counter < 300:
+    if startup_counter < 280:
         ui.draw_startup_countdown(screen, font_lg, startup_counter)
+
+    if cfg.game_over:
+        moving_allowed = False
+        ui.draw_game_over(screen, font_lg)
+
+    if cfg.game_won:
+        moving_allowed = False
+        ui.draw_game_won(screen, font_lg)
 
     if DEBUG:
         debug.draw_player_fudge(screen, direction, player_center_x, player_center_y)

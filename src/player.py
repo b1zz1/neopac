@@ -4,7 +4,7 @@ import config as cfg
 from utils import is_near_tile_center
 
 tile = cfg.TILE_SIZE
-fudge = 15
+fudge = cfg.FUDGE
 
 
 skin = 'simple'
@@ -62,7 +62,7 @@ def handle_input(event, buffered_direction, direction):
 
 def handle_collision(center_x, center_y, direction, lvl):
     turns = [False, False, False, False]
-    fudge = 15
+    fudge = cfg.FUDGE
 
     grid_x = center_x // tile
     grid_y = center_y // tile
@@ -124,7 +124,7 @@ def handle_collision(center_x, center_y, direction, lvl):
 
 def handle_direction(direction, buffered_dir, turns_allowed, pos_x, pos_y):
         # Check if buffered direction is allowed
-        if turns_allowed[buffered_dir]:
+        if turns_allowed[buffered_dir] and buffered_dir != direction:
             if buffered_dir != direction:
                 # Turning UP or DOWN? Snap X to the center of the column
                 if buffered_dir == 2 or buffered_dir == 3:
