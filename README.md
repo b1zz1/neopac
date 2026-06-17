@@ -14,7 +14,7 @@ Com o Python já instalado, acesse o repositório e copie o [endereço do arquiv
 <img src="assets/how_to_clone.gif" alt="How to clone repository">
 
 Acesse o local onde deseja copiar o projeto, abra o terminal e cole o comando `git clone https://codeberg.org/b1zz1/neopac.git`, acesse a pasta que acabou de ser adicionada `cd ./neopac`, então crie um **ambiente virtual** (`.venv`) com o comando `python -m venv ./.venv` e ative-o com `python -m venv ./.venv/Scripts/activate`.
-Execute o comando `pip install -r requirements.txt` e pronto! Agora é só executar o programa com o comando `python main.py`.
+Execute o comando `pip install -r requirements.txt` e pronto! Agora é só executar o programa com o comando `python main.py`. **Ou execute o arquivo NeoPac.exe!**
 
 ## Funcionalidades
 - Personagem jogável ou controlado por algoritmo $A*$

@@ -95,3 +95,8 @@ coverage.xml
 *.swo
 *~
 .DS_Store
+
+# PyInstaller
+build/
+dist/
+*.spec

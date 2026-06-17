@@ -8,6 +8,7 @@ import levels.level_1 as lvl_1
 import player
 import score
 import ui
+from src.utils import resource_path
 
 pygame.init()
 
@@ -16,8 +17,8 @@ DEBUG = True
 screen = pygame.display.set_mode([cfg.WIDTH, cfg.HEIGHT])
 timer = pygame.time.Clock()
 
-font = pygame.font.Font("assets/fonts/Tiny5-Regular.ttf", cfg.TILE_SIZE)
-font_lg = pygame.font.Font("assets/fonts/Tiny5-Regular.ttf", cfg.TILE_SIZE + 16)
+font = pygame.font.Font(resource_path("assets/fonts/Tiny5-Regular.ttf"), cfg.TILE_SIZE)
+font_lg = pygame.font.Font(resource_path("assets/fonts/Tiny5-Regular.ttf"), cfg.TILE_SIZE + 16)
 
 level = lvl_1
 counter = 0
