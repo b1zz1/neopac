@@ -6,12 +6,8 @@ from utils import is_near_tile_center
 tile = cfg.TILE_SIZE
 fudge = cfg.FUDGE
 
-
-skin = 'simple'
-
-
 for i in range(0, 4):
-    cfg.player_frames.append(pygame.transform.scale(pygame.image.load(f'assets/entities/player/{skin}_{i}.png'), (32, 32)))
+    cfg.player_frames.append(pygame.transform.scale(pygame.image.load(f'assets/entities/player/{cfg.SKIN_PACK}_{i}.png'), (32, 32)))
 
 
 def draw(screen, pos_x, pos_y, counter, direction):

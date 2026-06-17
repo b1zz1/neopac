@@ -8,10 +8,11 @@ import levels.level_1 as lvl_1
 import player
 import score
 import ui
+from src.ghost import Ghost
 
 pygame.init()
 
-DEBUG = True
+DEBUG = False
 
 screen = pygame.display.set_mode([cfg.WIDTH, cfg.HEIGHT])
 timer = pygame.time.Clock()
@@ -24,9 +25,12 @@ counter = 0
 startup_counter = 0
 flicker = False
 
-# Player starting position
-player_grid_x = 14  # Column 14
-player_grid_y = 24  # Row 24
+# Player score
+player_score = 0
+score_multiplier = 1.0
+# Player start position
+player_grid_x = 14
+player_grid_y = 24
 # Player position
 player_position_x = player_grid_x * cfg.TILE_SIZE
 player_position_y = player_grid_y * cfg.TILE_SIZE
@@ -36,9 +40,18 @@ buffered_direction = 0
 moving_allowed = False
 turns_allowed = [False, False, False, False]
 
-# Player score
-player_score = 0
-score_multiplier = 1.0
+# Ghosts
+ghost_targets = [(player_position_x, player_position_y)]
+blinky_dead = False
+blinky_box = False
+# Blinky start position
+blinky_grid_x = 13
+blinky_grid_y = 12
+# Blinky position
+blinky_position_x = blinky_grid_x * cfg.TILE_SIZE
+blinky_position_y = blinky_grid_y * cfg.TILE_SIZE
+# Blinky direction
+blinky_direction = 0
 
 lives = 3
 
@@ -117,9 +130,10 @@ while run:
     # Render graphics
     screen.fill('black')
     board.draw(screen, level.board, level.color, flicker)
+    player.draw(screen, player_position_x, player_position_y, counter, direction)
+    blinky = Ghost(blinky_position_x, blinky_position_y, ghost_targets[0], cfg.ghost_speed, blinky_direction, blinky_dead, blinky_box, 0, screen)
     ui.draw_score(screen, font, player_score)
     ui.draw_lives(screen, lives)
-    player.draw(screen, player_position_x, player_position_y, counter, direction)
 
     if startup_counter < 280:
         ui.draw_startup_countdown(screen, font_lg, startup_counter)
